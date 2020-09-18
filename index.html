@@ -4,275 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>阿武同学的主页哈哈</title>
+    <title>Document</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        
-        li {
-            list-style: none;
-        }
-        
-        .all {
-            width: 1000px;
-            height: 600px;
-            margin: 100px auto;
-            padding: 1px;
-            border: 1px solid #c7edcc;
-            position: relative;
-        }
-        
-        .screen {
-            width: 1000px;
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .screen ul {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 6000px;
-        }
-        
-        .screen ul li {
-            width: 1000px;
-            height: 600px;
-            float: left;
-        }
-        
-        .screen ul li img {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .screen ol {
-            position: absolute;
-            right: 10px;
-            bottom: 20px;
-        }
-        
-        .screen ol li {
-            width: 40px;
-            height: 40px;
-            float: left;
-            font-size: 20px;
-            border: 1px solid #000;
-            background-color: #fff;
-            border-radius: 50%;
-            color: #000;
-            margin-right: 10px;
+        .target {
+            line-height: 100px;
             text-align: center;
-            line-height: 40px;
-            cursor: pointer;
         }
         
-        .screen ol li.current {
-            background-color: yellow;
-            color: #000;
+        .jh {
+            color: antiquewhite;
         }
         
-        #arr {
-            display: none;
-        }
-        
-        #arr span {
-            width: 40px;
-            height: 80px;
-            position: absolute;
-            text-align: center;
-            top: 50%;
-            left: 0px;
-            margin-top: -40px;
-            background-color: #000;
-            cursor: pointer;
-            line-height: 80px;
-            font-weight: bold;
-            font-size: 40px;
-            color: #fff;
-            opacity: 0.3;
-            border: 1px solid #fff;
-        }
-        
-        #arr #right {
-            left: auto;
-            right: 0px;
+        .qg {
+            color: aqua;
         }
     </style>
 </head>
 
 <body>
-    <div class="all" id="box">
-        <div class="screen">
-            <ul>
-                <li><img src="./images/1-1.png" alt=""></li>
-                <li><img src="./images/1-2.png" alt=""></li>
-                <li><img src="./images/1-3.png" alt=""></li>
-                <li><img src="./images/1-4.png" alt=""></li>
-                <li><img src="./images/1-5.png" alt=""></li>
-            </ul>
-            <ol>
-                <!-- 右下角小方块按钮 -->
-            </ol>
-        </div>
-        <div id="arr">
-            <span id="left">&lt;</span>
-            <span id="right">&gt;</span>
-        </div>
-    </div>
+    <h1 class="jh target">点我去江汉学校</h1>
+    <h1 class="qg target">点我去轻工大学</h1>
     <script>
-        // 思路分析：
-        /*
-        1.做动画的函数封装
-        2.获取元素
-        3.获取动画的单位宽
-        4.简单轮播
-            4.1 根据图片个数动态创建小方块个数
-            4.2为右小角小方块注册单击事件
-        5.右边按钮点击事件
-            5.1把图片向右滑动一张封装成函数
-            5.2将函数给点击事件
-            5.3自动轮播，计时器调用该函数
-        6.左边按钮点击事件
-         */
-
-        //1.做动画的函数封装
-        function animate(ele, target) {
-            // 清除老计时器
-            clearInterval(ele.timerId);
-            ele.timerId = setInterval(function() {
-                // 1.获取当前位置
-                let currentLeft = ele.offsetLeft;
-                // 2.设置步长   （ 目标位置target - 当前位置currentLeft ）/10
-                let step = (target - currentLeft) / 10;
-                step = step > 0 ? Math.ceil(step) : Math.floor(step);
-                // 3.计算
-                currentLeft += step;
-                ele.style.left = currentLeft + 'px';
-                // 3.判断赋值
-                if (currentLeft == target) {
-                    ele.style.left = currentLeft + 'px';
-                    clearInterval(ele.timerId);
-                }
-            }, 10)
-        };
-        // 2.获取元素
-        let box = document.getElementById('box'); //外层大盒子
-        let screen = document.querySelector('.screen'); //ul的父盒子
-        // 3. 获取单位宽
-        let uniWidth = screen.offsetWidth; //做动画的单位宽
-        let ul1 = document.querySelector('.screen ul'); //做动画的ul
-        let lisUl = ul1.children; //做轮播的li们
-        let ol1 = document.querySelector('#box ol'); //装小按钮的ol
-        let arrDiv = document.getElementById('arr'); //放左右按钮的大盒子
-        let leftBtn = document.getElementById('left'); //左边按钮
-        let rightBtn = document.getElementById('right'); //右边按钮
-        // 4.简单轮播
-        for (let i = 0; i < lisUl.length; i++) {
-            //   4.1根据图片个数创建li
-            let liNew = document.createElement('li');
-            // 设置内容
-            liNew.innerHTML = i + 1;
-            // 追加到ol
-            ol1.appendChild(liNew);
-        }
-        // 4.2为右小角小方块注册单击事件
-        let lisOl = ol1.children;
-        //声明一个变量记录左右焦点轮播图滚出去的个数
-        let picIndex = 0;
-        // 声明一个变量记录小方块滚出去的个数
-        let gunIndex = 0;
-        // 给第一个li添加类
-        lisOl[0].setAttribute('class', 'current');
-        for (let i = 0; i < lisOl.length; i++) {
-            // 为li添加索引属性
-            lisOl[i].setAttribute('index', i);
-            let idx = lisOl[i].getAttribute('index');
-            lisOl[i].onclick = function() {
-                // 排他思想
-                for (let j = 0; j < lisOl.length; j++) {
-                    lisOl[j].removeAttribute('class');
-                };
-                lisOl[i].setAttribute('class', 'current');
-                // 获取目标位置
-                let target = -uniWidth * idx;
-                animate(ul1, target);
-                picIndex = gunIndex = idx;
-            };
-        };
-        // 自动轮播
-        let timerId = null;
-        timerId = setInterval(nextPic, 2000);
-        // 给大盒子设置鼠标移入移出事件
-        box.onmouseover = function() {
-            clearInterval(timerId);
-            arrDiv.style.display = 'block';
-        };
-        box.onmouseout = function() {
-            timerId = setInterval(nextPic, 2000);
-            arrDiv.style.display = 'none';
-        };
-        // 克隆ul里面得第一个li并且追加到ul最后面
-        let liClone = lisUl[0].cloneNode(true);
-        ul1.appendChild(liClone);
-
-        function nextPic() {
-            // 如果当前是最后一张图片
-            if (picIndex == lisOl.length) {
-                // 将序号和位置变为第一张的序号和位置
-                picIndex = 0;
-                ul1.style.left = -uniWidth * picIndex + 'px';
+        // 1.获取元素
+        let jh = document.querySelector('.jh');
+        let qg = document.querySelector('.qg');
+        // 2.注册点击事件
+        jh.onclick = function() {
+            // 3.判断
+            let key = prompt('江汉学校学部主任：');
+            if (key == '李元荣') {
+                window.location.href = './jh.html';
+            } else {
+                alert('输入错误，请重试');
             }
-            // 向右滚的图片++
-            picIndex++;
-            console.log(picIndex);
-            // 获取目标位置
-            let target = -uniWidth * picIndex;
-            animate(ul1, target);
-            // 右下角小图标改变
-            for (let j = 0; j < lisOl.length; j++) {
-                lisOl[j].removeAttribute('class');
-            };
-            //滚出去的图片++
-            gunIndex++;
-            // 当前为最后一张图片
-            if (gunIndex == lisOl.length) {
-                gunIndex = 0;
-            };
-            console.log(gunIndex);
-            lisOl[gunIndex].setAttribute('class', 'current');
         };
-        rightBtn.onclick = nextPic;
-        // 6.左边按钮点击事件
-        leftBtn.onclick = function() {
-            // 如果当前是第一张图片
-            if (picIndex == 0) {
-                // 将序号和位置变为第一张的序号和位置
-                picIndex = lisOl.length;
-                ul1.style.left = -uniWidth * picIndex + 'px';
+        qg.onclick = function() {
+            // 3.判断
+            let key = prompt('1509寝室长');
+            if (key == '王哲武') {
+                window.location.href = './qg.html';
+            } else {
+                alert('输入错误，请重试');
             }
-            // 向右滚的图片--
-            picIndex--;
-            console.log(picIndex);
-            // 获取目标位置
-            let target = -uniWidth * picIndex;
-            animate(ul1, target);
-            // 右下角小图标改变
-            for (let j = 0; j < lisOl.length; j++) {
-                lisOl[j].removeAttribute('class');
-            };
-            // 当前为最后一张图片
-            if (gunIndex == 0) {
-                gunIndex = lisOl.length;
-            };
-            //滚出去的图片--
-            gunIndex--;
-            console.log(gunIndex);
-            lisOl[gunIndex].setAttribute('class', 'current');
-        }
+        };
     </script>
 </body>
 
