@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>阿武同学的主页</title>
+    <script src="./js/index.js"></script>
     <style>
         .target {
             line-height: 100px;
@@ -26,28 +27,6 @@
     <h1 class="jh target">点我去江汉学校</h1>
     <h1 class="qg target">点我去轻工大学</h1>
     <script>
-        // 1.获取元素
-        let jh = document.querySelector('.jh');
-        let qg = document.querySelector('.qg');
-        // 2.注册点击事件
-        jh.onclick = function() {
-            // 3.判断
-            let key = prompt('江汉学校学部主任：');
-            if (key == '李元荣') {
-                window.location.href = './jh.html';
-            } else {
-                alert('输入错误，请重试');
-            }
-        };
-        qg.onclick = function() {
-            // 3.判断
-            let key = prompt('1509寝室长');
-            if (key == '王哲武') {
-                window.location.href = './1509.html';
-            } else {
-                alert('输入错误，请重试');
-            }
-        };
     </script>
 </body>
 
