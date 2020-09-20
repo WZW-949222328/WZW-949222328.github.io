@@ -7,25 +7,80 @@
     <title>阿武同学的主页</title>
     <script src="./js/index.js"></script>
     <style>
-        .target {
-            line-height: 100px;
-            text-align: center;
-            cursor: pointer;
+        * {
+            margin: 0;
+            padding: 0;
         }
         
-        .jh {
-            color: antiquewhite;
+        #neon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 100vh;
+            background: #031628;
         }
         
-        .qg {
-            color: aqua;
+        .btn {
+            width: 200px;
+            height: 100px;
+            border: 1px solid;
+            background-color: transparent;
+            text-transform: uppercase;
+            font-size: 30px;
+            padding: 10px 20px;
+            font-weight: 300;
         }
+        
+        .one {
+            color: #4cc9f0;
+        }
+        
+        .two {
+            color: #f038ff;
+        }
+        
+        .three {
+            color: #b9e769;
+        }
+        
+        .btn:hover {
+            color: white;
+            border: 0;
+        }
+        
+        .one:hover {
+            background-color: #4cc9f0;
+            -webkit-box-shadow: 10px 10px 99px 6px rgba(76, 201, 240, 1);
+            -moz-box-shadow: 10px 10px 99px 6px rgba(76, 201, 240, 1);
+            box-shadow: 10px 10px 99px 6px rgba(76, 201, 240, 1);
+        }
+        
+        .two:hover {
+            background-color: #f038ff;
+            -webkit-box-shadow: 10px 10px 99px 6px rgba(240, 56, 255, 1);
+            -moz-box-shadow: 10px 10px 99px 6px rgba(240, 56, 255, 1);
+            box-shadow: 10px 10px 99px 6px rgba(240, 56, 255, 1);
+        }
+        
+        .three:hover {
+            background-color: #b9e769;
+            -webkit-box-shadow: 10px 10px 99px 6px rgba(185, 231, 105, 1);
+            -moz-box-shadow: 10px 10px 99px 6px rgba(185, 231, 105, 1);
+            box-shadow: 10px 10px 99px 6px rgba(185, 231, 105, 1);
+        }
+        /* 作者：Jimmy 链接：https: //juejin.im/post/6861501624993447950
+        来源：掘金 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 */
     </style>
 </head>
 
 <body>
-    <h1 class="jh target">点我去江汉学校</h1>
-    <h1 class="qg target">点我去轻工大学</h1>
+    <div id="neon-btn">
+        <button class="btn one">点我去江汉学校</button>
+        <button class="btn two">点我去轻工大学</button>
+        <button class="btn three">Hover me</button>
+    </div>
+
+    <!-- 作者：Jimmy 链接：https://juejin.im/post/6861501624993447950 来源：掘金 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
     <script>
     </script>
 </body>
