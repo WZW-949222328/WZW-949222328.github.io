@@ -5,7 +5,7 @@ window.onload = function() {
     // 2. 注册点击事件
     one.onclick = function() {
         // 3. 判断
-        let key = prompt('江汉学校学部主任：');
+        let key = prompt('江汉学校高中部主任：');
         if (key == '李元荣') {
             window.location.href = './jh.html';
         } else {
