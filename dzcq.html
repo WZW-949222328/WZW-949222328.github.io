@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丁真测球</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url(./images/yiyandingzhen.jpg) no-repeat 0 0 transparent;
+            background-size: 100% 100vh;
+        }
+
+        a {
+            position: relative;
+            display: inline-block;
+            padding: 12px 36px;
+            margin: 10px 40px;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 18px;
+            letter-spacing: 2px;
+            border-radius: 40px;
+            background: linear-gradient(90deg, #0162c8, #55e7fc);
+            overflow: hidden;
+        }
+
+        a:nth-child(1) {
+            background: linear-gradient(90deg, #755bea, #ff72c0);
+        }
+
+        span {
+            position: absolute;
+            background: #fff;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            animation: animate 1s linear infinite;
+        }
+
+        @keyframes animate {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.5;
+            }
+
+            100% {
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+            }
+        }
+
+        .btn-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 14vh;
+        }
+
+        .bifen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 8vh;
+            margin-top: 4vh;
+        }
+
+        .bbox {
+            width: 10vh;
+            height: 14vh;
+            border-radius: 1vh;
+            background-color: #fff;
+            line-height: 14vh;
+            text-align: center;
+            margin: 0 10px;
+            filter: drop-shadow(2px 4px 16px hsl(220deg 60% 50% /0.3))
+        }
+
+        .line {
+            line-height: 14vh;
+        }
+
+        .all {
+            margin-top: 34vh;
+        }
+
+        .title {
+            width: 100%;
+            text-align: center;
+            font-size: 4vh;
+            color: #000;
+            position: fixed;
+            font-weight: 700;
+            top: 4vh;
+            background-image: linear-gradient(to right, orange, purple);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="title">
+        <div>2022卡塔尔世界杯比分</div>
+        <div>
+            理塘文化大使亲自开测
+        </div>
+    </div>
+    <div class="all">
+        <!-- <a href="#">Button</a> -->
+        <div class="bifen">
+            <div class="bbox" id="s1">
+                0
+            </div>
+            <div class="line">:</div>
+            <div class="bbox" id="s2">
+                0
+            </div>
+        </div>
+        <div class="btn-box">
+            <a href="#" id="btn">开测</a>
+        </div>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('a');
+        buttons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples)
+                setTimeout(() => {
+                    ripples.remove()
+                }, 1000)
+            })
+        })
+        function randomRange(min, max) { // min最小值，max最大值
+
+            return Math.floor(Math.random() * (max - min)) + min;
+
+        }
+        let btnele = document.querySelector('#btn')
+        let s1ele = document.querySelector('#s1')
+        let s2ele = document.querySelector('#s2')
+        btnele.onclick = function () {
+            // window.location.href = './dzcq.html'
+            s1ele.innerHTML = randomRange(0, 5)
+            s2ele.innerHTML = randomRange(0, 5)
+            console.log(
+                s1ele.innerHTML,
+                s2ele.innerHTML,
+            );
+        }
+
+    </script>
+</body>
+
+</html>
