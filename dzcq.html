@@ -120,7 +120,8 @@
             color: rgb(142, 30, 24);
             text-align: center;
         }
-        input{
+
+        input {
             padding-left: 10px;
         }
     </style>
@@ -223,7 +224,7 @@
             let d = 0 // 当日成本
             let e = hei // 连黑天数
             // 连黑天数算成本
-            for (let index = 0; index < e+1; index++) {
+            for (let index = 0; index < e + 1; index++) {
                 // console.log(d);
                 d = Math.floor(a + b / 3)
                 b = b + d
@@ -234,7 +235,7 @@
             // 倍投入30天总收益,当天只要不黑就能净收益2*a
             c = Math.floor((30 - e) * a * 2)
             count.innerHTML = c
-            h_count.innerHTML = d
+            h_count.innerHTML = (a * 2 + b) / 3
             lianhei.innerHTML = e
             lianhei_1.innerHTML = e
             zcb.innerHTML = b
