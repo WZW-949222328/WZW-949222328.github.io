@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>足球比分预测</title>
+    <title>倍投计算器</title>
     <style>
         * {
             margin: 0;
@@ -35,13 +35,13 @@
             background: linear-gradient(90deg, #755bea, #ff72c0);
         }
 
-        span {
+        /* span {
             position: absolute;
             background: #fff;
             transform: translate(-50%, -50%);
             border-radius: 50%;
             animation: animate 1s linear infinite;
-        }
+        } */
 
         @keyframes animate {
             0% {
@@ -102,6 +102,27 @@
             -webkit-background-clip: text;
             color: transparent;
         }
+
+        .bt,
+        .conut {
+            color: #fff;
+            display: flex;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        #h_count,
+        #count {
+            background-color: #fff;
+            width: 100px;
+            border-radius: 5px;
+            display: inline-block;
+            color: rgb(142, 30, 24);
+            text-align: center;
+        }
+        input{
+            padding-left: 10px;
+        }
     </style>
 </head>
 
@@ -112,11 +133,11 @@
         <div>
             理塘文化大使亲自开测
         </div> -->
-        足球比分预测
+        倍投计算器
     </div>
     <div class="all">
         <!-- <a href="#">Button</a> -->
-        <div class="bifen">
+        <!-- <div class="bifen">
             <div class="bbox" id="s1">
                 0
             </div>
@@ -127,40 +148,94 @@
         </div>
         <div class="btn-box">
             <a href="#" id="btn">开测</a>
+        </div> -->
+        <div class="bt">
+            <div class="label">连黑的天数：</div>
+            <input id="hei" type="text">
+        </div>
+        <div class="bt" style="margin-top: 4px;">
+            <div class="label">基础成本：</div>
+            <input id="cb" type="text">
+        </div>
+
+        <div class="conut" style="margin-top: 20px;">
+            倍投30天总收益：<span id="count"></span>
+        </div>
+        <div class="conut" style="margin-top: 4px;">
+            连黑 <span id="lianhei"></span>天当日成本（应投）：<span id="h_count"></span>
+        </div>
+        <div class="btn-box">
+            <a href="#" id="btn1">开测</a>
         </div>
     </div>
     <script>
-        const buttons = document.querySelectorAll('a');
-        buttons.forEach(button => {
-            button.addEventListener('click', function (e) {
-                let x = e.clientX - e.target.offsetLeft;
-                let y = e.clientY - e.target.offsetTop;
-                let ripples = document.createElement('span');
-                ripples.style.left = x + 'px';
-                ripples.style.top = y + 'px';
-                this.appendChild(ripples)
-                setTimeout(() => {
-                    ripples.remove()
-                }, 1000)
-            })
-        })
-        function randomRange(min, max) { // min最小值，max最大值
+        // const buttons = document.querySelectorAll('a');
+        // buttons.forEach(button => {
+        //     button.addEventListener('click', function (e) {
+        //         let x = e.clientX - e.target.offsetLeft;
+        //         let y = e.clientY - e.target.offsetTop;
+        //         let ripples = document.createElement('span');
+        //         ripples.style.left = x + 'px';
+        //         ripples.style.top = y + 'px';
+        //         this.appendChild(ripples)
+        //         setTimeout(() => {
+        //             ripples.remove()
+        //         }, 1000)
+        //     })
+        // })
+        // function randomRange(min, max) { // min最小值，max最大值
 
-            return Math.floor(Math.random() * (max - min)) + min;
+        //     return Math.floor(Math.random() * (max - min)) + min;
 
-        }
-        let btnele = document.querySelector('#btn')
-        let s1ele = document.querySelector('#s1')
-        let s2ele = document.querySelector('#s2')
+        // }
+        // let btnele = document.querySelector('#btn')
+        // let s1ele = document.querySelector('#s1')
+        // let s2ele = document.querySelector('#s2')
+        // btnele.onclick = function () {
+        //     // window.location.href = './dzcq.html'
+        //     s1ele.innerHTML = randomRange(0, 5)
+        //     s2ele.innerHTML = randomRange(0, 5)
+        //     console.log(
+        //         s1ele.innerHTML,
+        //         s2ele.innerHTML,
+        //     );
+        // }
+
+        let count = document.querySelector('#count') // 倍投收益
+        let lianhei = document.querySelector('#lianhei') // 倍投收益
+        let h_count = document.querySelector('#h_count') // 倍投收益
+        let btnele = document.querySelector('#btn1')
         btnele.onclick = function () {
-            // window.location.href = './dzcq.html'
-            s1ele.innerHTML = randomRange(0, 5)
-            s2ele.innerHTML = randomRange(0, 5)
-            console.log(
-                s1ele.innerHTML,
-                s2ele.innerHTML,
-            );
+            // 倍投计算器
+            let hei = Math.floor(document.querySelector('#hei').value) // 连黑天数
+            console.log(hei);
+            let cb = Math.floor(document.querySelector('#cb').value) // 基础成本
+            console.log(cb);
+            // 每次投入金额 = 前几次输的总和/3 + 基础成本
+            let a = cb // 基础成本
+            let b = 0 // 总成本
+            let c = 0 // 总净收益
+            let d = 0 // 当日成本
+            let e = hei // 连黑天数
+            // 连黑天数算成本
+            for (let index = 0; index < e; index++) {
+                // console.log(d);
+                d = Math.floor(a + b / 3)
+                b = b + d
+                console.log('黑的第' + (index + 1) + '天成本', d);
+            }
+            console.log('连黑' + e + '天的当日成本', d);
+            console.log('连黑' + e + '天的总成本', b);
+            // 倍投入30天总收益,当天只要不黑就能净收益2*a
+            c = Math.floor((30 - e) * a * 2)
+            count.innerHTML = c
+            h_count.innerHTML = d
+            lianhei.innerHTML = e
+            console.log('倍投入30天总净收益', c);
         }
+
+
+
 
     </script>
 </body>
