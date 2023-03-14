@@ -159,6 +159,9 @@
         </div>
 
         <div class="conut" style="margin-top: 20px;">
+            连黑<span id="lianhei_1"></span>天后的总成本（不算红的）：<span id="zcb"></span>
+        </div>
+        <div class="conut" style="margin-top: 20px;">
             倍投30天总收益：<span id="count"></span>
         </div>
         <div class="conut" style="margin-top: 4px;">
@@ -204,6 +207,8 @@
         let count = document.querySelector('#count') // 倍投收益
         let lianhei = document.querySelector('#lianhei') // 倍投收益
         let h_count = document.querySelector('#h_count') // 倍投收益
+        let lianhei_1 = document.querySelector('#lianhei_1') // 倍投收益
+        let zcb = document.querySelector('#zcb') // 倍投收益
         let btnele = document.querySelector('#btn1')
         btnele.onclick = function () {
             // 倍投计算器
@@ -224,13 +229,15 @@
                 b = b + d
                 console.log('黑的第' + (index + 1) + '天成本', d);
             }
-            console.log('连黑' + e + '天的当日成本', d);
-            console.log('连黑' + e + '天的总成本', b);
+            console.log('连黑' + e + '天下一天的当日成本', d);
+            console.log('连黑' + e + '天后的总成本', b);
             // 倍投入30天总收益,当天只要不黑就能净收益2*a
             c = Math.floor((30 - e) * a * 2)
             count.innerHTML = c
             h_count.innerHTML = d
             lianhei.innerHTML = e
+            lianhei_1.innerHTML = e
+            zcb.innerHTML = b
             console.log('倍投入30天总净收益', c);
         }
 
