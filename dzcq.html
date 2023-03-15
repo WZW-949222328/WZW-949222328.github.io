@@ -61,7 +61,7 @@
         .btn-box {
             display: flex;
             justify-content: center;
-            margin-top: 14vh;
+            margin-top: 30px;
         }
 
         .bifen {
@@ -110,6 +110,7 @@
             display: flex;
             width: 80%;
             margin: 0 auto;
+            font-size: 14px;
         }
 
         #h_count,
@@ -180,11 +181,11 @@
         </div>
         <div class="bt">
             <div class="label">连黑天数：</div>
-            <input id="hei" type="text" placeholder="请输入">
+            <input id="hei" type="number" placeholder="请输入">
         </div>
         <div class="bt" style="margin-top: 4px;">
             <div class="label">基础成本：</div>
-            <input id="cb" type="text" placeholder="请输入">
+            <input id="cb" type="number" placeholder="请输入">
         </div>
         <div class="conut" style="margin-top: 4px;">
             连黑<span id="lianhei_1"></span>天后的总成本（不算红的）：<span id="zcb"></span>
@@ -193,7 +194,7 @@
             倍投30天总收益：<span id="count"></span>
         </div>
         <div class="conut" style="margin-top: 4px;">
-            连黑 <span id="lianhei"></span>天当日成本（应投）：<span id="h_count"></span>
+            连黑 <span id="lianhei"></span>天当日应投：<span id="h_count"></span>
         </div>
         <div class="btn-box">
             <a href="#" id="btn1">开测</a>
@@ -244,6 +245,14 @@
             console.log(hei);
             let cb = Math.floor(document.querySelector('#cb').value) // 基础成本
             console.log(cb);
+            if( !hei || hei<0 ){
+                alert('连黑天数必须大于0')
+                return false
+            }
+            if( !cb || cb<0 ){
+                alert('基础成本必须大于0')
+                return false
+            }
             // 每次投入金额 = 前几次输的总和/3 + 基础成本
             let a = cb // 基础成本
             let b = 0 // 总成本
