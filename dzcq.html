@@ -12,8 +12,9 @@
         }
 
         body {
-            background: url(./images/red_bg3.png) no-repeat 0 0 transparent;
-            background-size: 100% 100vh;
+            /* background: url(./images/red_bg3.png) no-repeat 0 0 transparent; */
+            /* background-size: 100% 100vh; */
+            background-color: rgb(142, 30, 24);
         }
 
         a {
@@ -87,7 +88,7 @@
         }
 
         .all {
-            margin-top: 48vh;
+            margin-top: 18vh;
         }
 
         .title {
@@ -107,7 +108,7 @@
         .conut {
             color: #fff;
             display: flex;
-            width: 60%;
+            width: 80%;
             margin: 0 auto;
         }
 
@@ -123,6 +124,16 @@
 
         input {
             padding-left: 10px;
+        }
+        .beizhu{
+            margin: 0 auto;
+            width: 80%;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .beizhu p{
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -150,16 +161,32 @@
         <div class="btn-box">
             <a href="#" id="btn">开测</a>
         </div> -->
+        <div class="beizhu">
+            <p>
+                该倍投思想：
+            </p>
+            <p>
+               1.每天固定按3的赔率计算，基础成本即为每天倍投的固定金额。
+            </p>
+            <p>
+               2.当天红即赚2倍的基础成本。
+            </p>
+            <p>
+               3.连黑后的下一天投入金额计算规则为：把之前连黑的成本赚回来，并且当天再赚2倍的基础成本。
+            </p>
+            <p>
+               4.总结：该倍投思想就是红的当天就赚：2*基础成本，黑就赚0。一个月收入就是30天内红的天数*基础成本
+            </p>
+        </div>
         <div class="bt">
-            <div class="label">连黑的天数：</div>
-            <input id="hei" type="text">
+            <div class="label">连黑天数：</div>
+            <input id="hei" type="text" placeholder="请输入">
         </div>
         <div class="bt" style="margin-top: 4px;">
             <div class="label">基础成本：</div>
-            <input id="cb" type="text">
+            <input id="cb" type="text" placeholder="请输入">
         </div>
-
-        <div class="conut" style="margin-top: 20px;">
+        <div class="conut" style="margin-top: 4px;">
             连黑<span id="lianhei_1"></span>天后的总成本（不算红的）：<span id="zcb"></span>
         </div>
         <div class="conut" style="margin-top: 20px;">
@@ -224,9 +251,9 @@
             let d = 0 // 当日成本
             let e = hei // 连黑天数
             // 连黑天数算成本
-            for (let index = 0; index < e + 1; index++) {
+            for (let index = 0; index < e+1 ; index++) {
                 // console.log(d);
-                d = Math.floor(a + b / 3)
+                d = Math.floor((a * 2 + b) / 2)
                 b = b + d
                 console.log('黑的第' + (index + 1) + '天成本', d);
             }
@@ -235,7 +262,7 @@
             // 倍投入30天总收益,当天只要不黑就能净收益2*a
             c = Math.floor((30 - e) * a * 2)
             count.innerHTML = c
-            h_count.innerHTML = (a * 2 + b) / 3
+            h_count.innerHTML =  d
             lianhei.innerHTML = e
             lianhei_1.innerHTML = e
             zcb.innerHTML = b
